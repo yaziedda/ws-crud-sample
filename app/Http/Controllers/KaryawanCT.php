@@ -22,16 +22,44 @@ class KaryawanCT extends Controller
         return $responseSent->sendResponse('success', $karyawan, 'success get data');
     }
 
+    public function detail(Request $request){
+
+        $nik = $request->input('nik');
+        
+        $responseSent = new ResponseSent();
+
+        if($nik != null){
+
+            $karyawan = new Karyawan;
+            $karyawan = $karyawan->where('nik', $nik)->first();
+
+            if($karyawan != null){
+
+                return $responseSent->sendResponse('success', $karyawan, 'success delete data');
+
+            }else{
+
+                return $responseSent->sendResponse('failed', null, 'karyawan not exist');    
+                
+            }
+
+
+        }else{
+            return $responseSent->sendResponse('failed', null, 'invalid parameter');
+        }
+    }
+
     public function insert(Request $request){
 
         $nik = $request->input('nik');
         $nama = $request->input('nama');
         $tanggal_lahir = $request->input('tanggal_lahir');
         $alamat = $request->input('alamat');
+        $gaji = $request->input('gaji');
         
         $responseSent = new ResponseSent();
 
-        if($nik != null && $nama != null && $tanggal_lahir != null && $alamat != null){
+        if($nik != null && $nama != null && $tanggal_lahir != null && $alamat != null && $gaji != null){
 
             $karyawan = new Karyawan;
 
@@ -45,6 +73,7 @@ class KaryawanCT extends Controller
                 $karyawan['nama'] = $nama;
                 $karyawan['tanggal_lahir'] = $tanggal_lahir;
                 $karyawan['alamat'] = $alamat;
+                $karyawan['gaji'] = $gaji;
                 $karyawan->save();
 
                 return $responseSent->sendResponse('success', $karyawan, 'success insert data');
@@ -65,10 +94,11 @@ class KaryawanCT extends Controller
         $nama = $request->input('nama');
         $tanggal_lahir = $request->input('tanggal_lahir');
         $alamat = $request->input('alamat');
+        $gaji = $request->input('gaji');
         
         $responseSent = new ResponseSent();
 
-        if($nik != null && $nama != null && $tanggal_lahir != null && $alamat != null){
+        if($nik != null && $nama != null && $tanggal_lahir != null && $alamat != null && $gaji != null){
 
             $karyawan = new Karyawan;
             $karyawan = $karyawan->where('nik', $nik)->first();
@@ -79,6 +109,7 @@ class KaryawanCT extends Controller
                 $karyawan['nama'] = $nama;
                 $karyawan['tanggal_lahir'] = $tanggal_lahir;
                 $karyawan['alamat'] = $alamat;
+                $karyawan['gaji'] = $gaji;
                 $karyawan->save();
 
                 return $responseSent->sendResponse('success', $karyawan, 'success update data');

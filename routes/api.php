@@ -22,3 +22,4 @@ Route::post('/karyawan/all', 'KaryawanCT@all');
 Route::post('/karyawan/insert', 'KaryawanCT@insert');
 Route::post('/karyawan/update', 'KaryawanCT@update');
 Route::post('/karyawan/delete', 'KaryawanCT@delete');
+Route::post('/karyawan/detail', 'KaryawanCT@detail');
